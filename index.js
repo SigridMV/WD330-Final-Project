@@ -12,7 +12,11 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
+    res.sendFile('index.html', { root: __dirname });
+});
+
+app.get('/home', async (req, res) => {
     try {
         // Obtener recetas aleatorias
         const response = await axios.get(`https://api.spoonacular.com/recipes/random?number=3&apiKey=${key_api}`);
